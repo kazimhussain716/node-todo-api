@@ -5,27 +5,28 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     return console.log('Unable to connect to mongodb server');
   }
   console.log('Connected to mongodb server');
-
-  //delete Many
-  //  db.collection('Todos').deleteMany({ text:'Eat lunch' }).then((result)=>{
-  //     console.log(result);
-
-  //delete One
-  // db.collection('Todos').deleteOne({ text: 'Eat lunch' }).then((res) => {
-  //   console.log(res);
-  // })
-
-  //findOneAnddelete
-  // db.collection('Todos').findOneAndDelete({ completed: false }).then((res) => {
-  //   console.log(res);
-  // })
-
-    //  db.collection('Users').deleteMany({ name:'Kazim Hussain' }).then((result)=>{
-    //   console.log(result);
-    //  })
-    // "5948ecbd2accd6ebea4c0ad5"
-      db.collection('Users').findOneAndDelete({ _id:new ObjectID("5948ecbd2accd6ebea4c0ad5") }).then((result)=>{
+  db.collection('Todos').findOneAndUpdate({
+    _id: new ObjectID('5948e9312accd6ebea4c09b1')
+  }, {
+      $set: {
+        completed: true
+      }
+    }, {
+      returnOriginal: false
+    }).then((result) => {
       console.log(result);
-     })
+    });
+
+  // db.collection('Todos').findOneAndUpdate({
+  //   _id: new ObjectID('5948e9312accd6ebea4c09b1')
+  // }, {
+  //     $set: {
+  //       completed: false
+  //     }
+  //   }, {
+  //     returnOriginal: false
+  //   }).then((result) => {
+  //     console.log(result);
+  //   });
   // db.close();
 })
